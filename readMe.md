@@ -12,10 +12,11 @@ Train/test datasets:
 - [Rain in Australia data source](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package/data)
 
 
-Really usefull materials for learning linear regression models:
+Really usefull materials for learning linear models:
 - [Mathematics of Gradient Descent 1](https://www.youtube.com/watch?v=jc2IthslyzM)
 - [Mathematics of Gradient Descent 2](https://www.youtube.com/watch?v=sDv4f4s2SB8)
 - [Stochastic Gradient Descent](https://www.youtube.com/watch?v=vMh0zPT0tLI)
+- [Logistic Regression using Scikit-Learn](https://www.youtube.com/watch?v=aL21Y-u0SRs)
 
 
 Must-learn Python libraries:
@@ -28,4 +29,6 @@ Must-learn Python libraries:
 
 To do:
 - Calculating correlation matrix
-- Logistic regression
+- Metrics for classification
+- More normalization methods
+- More fun models

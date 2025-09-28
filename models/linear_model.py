@@ -5,9 +5,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 import util.validation
-import util.metrics
-import util.normalization
-
 
 class LinearModel(ABC):
     def __init__(self, 
@@ -16,6 +13,12 @@ class LinearModel(ABC):
         self.fitted = False
         self.normalization_func = normalization_func
         self.loss_func = loss_func
+
+    def __str__(self):
+        return 'LinearModel()'
+    
+    def __repr__(self):
+        return 'LinearModel()'
 
     def _validate(self, features: np.ndarray, labels: np.ndarray, 
                         learning_rate: float=0.01, batch_size: int=None, 
@@ -42,7 +45,7 @@ class LinearModel(ABC):
 
     def _prepare_parameters(self) -> None:
         self.bias = 0.0
-        self.weights = np.zeros((self.features.shape[1], 1))
+        self.weights = np.zeros(self.features.shape[1])
 
     def _prepare_training_variables(self) -> None:
         self.fitted = False
@@ -85,7 +88,7 @@ class LinearModel(ABC):
             features_batch = self.features[batch_idx : batch_idx + self.batch_size, :]
 
             predicted_labels = self._predict(features_batch)
-            true_labels = self.labels[batch_idx : batch_idx + self.batch_size, :]
+            true_labels = self.labels[batch_idx : batch_idx + self.batch_size]
 
             curr_loss = self.loss_func(predicted_labels, true_labels)
             batch_losses.append(curr_loss)
@@ -120,18 +123,13 @@ class LinearModel(ABC):
     def _predict(self, features: np.ndarray) -> np.ndarray:
         pass
 
+    @abstractmethod
     def predict(self, features: np.ndarray) -> np.ndarray:
-        if not self.fitted:
-            raise RuntimeError("Model must be fitted before prediction")
-        elif features.shape[1] != self.weights.shape[0]:
-            raise ValueError("Feature dimensions are different from feature dimensions in the training set")
-
-        features = self.normalization_func(features, self.feature_means, self.feature_stdevs)
-        return self._predict(features)
+        pass
     
     def plot_losses(self):
         if not self.fitted:
-            raise RuntimeError("Model must be fitted before plotting losses per epoch")
+            raise RuntimeError("Model must be fitted before plotting losses")
         
         fig, ax = plt.subplots()
         ax.plot(range(len(self.epoch_losses)), self.epoch_losses)
@@ -139,23 +137,3 @@ class LinearModel(ABC):
         ax.set_xlabel("Epochs")
         ax.set_ylabel("Loss")
         plt.show()
-
-class LinearRegression(LinearModel):
-    def __init__(self, 
-                 normalization_func: Callable[[np.ndarray, np.ndarray, np.ndarray], np.ndarray] = util.normalization.zscore,
-                 loss_func: Callable[[np.ndarray, np.ndarray], float] = util.metrics.mean_squared_error):
-        super().__init__(normalization_func, loss_func)
-
-    def _update_parameters(self, features:np.ndarray, 
-            predicted_labels:np.ndarray, true_labels:np.ndarray) -> None:
-        error = predicted_labels - true_labels
-        n = features.shape[0]
-
-        bias_derivative = 2 * np.sum(error) / n
-        weight_derivatives = 2 * (features.T @ error) / n
-
-        self.bias -= bias_derivative * self.learning_rate
-        self.weights -= weight_derivatives * self.learning_rate
-
-    def _predict(self, features: np.ndarray) -> np.ndarray:
-        return features @ self.weights + self.bias
