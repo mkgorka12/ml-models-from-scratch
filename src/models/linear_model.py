@@ -99,9 +99,7 @@ class LinearModel(ABC):
     def _should_continue_approximation(self) -> bool:
         return (
             self.number_epochs is not None and self.epoch_idx < self.number_epochs
-        ) or (
-            self.number_epochs is None and not self.fitted
-        )
+        ) or (self.number_epochs is None and not self.fitted)
 
     def _shuffle_dataset(self) -> None:
         indices = np.arange(len(self.labels))

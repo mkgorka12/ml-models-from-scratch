@@ -16,6 +16,7 @@ This section is WIP.
 Train/test datasets:
 - [Car Prediction data source](https://www.kaggle.com/datasets/amjadzhour/car-price-prediction)
 - [Rain in Australia data source](https://www.kaggle.com/datasets/jsphyg/weather-dataset-rattle-package/data)
+- [MNIST](https://www.kaggle.com/datasets/hojjatk/mnist-dataset)
 
 
 Really usefull materials for learning linear models:
