@@ -1,11 +1,17 @@
 # Machine learning fun
 
-## Overview
-
 This is my own implementations of a few interesting machine learning models.
 Inspiration: [Google ML Crash Course](https://developers.google.com/machine-learning/crash-course/linear-regression).
 
-## Sources
+# Overview
+
+This section is WIP.
+
+# Quickstart
+
+This section is WIP.
+
+# Sources
 
 Train/test datasets:
 - [Car Prediction data source](https://www.kaggle.com/datasets/amjadzhour/car-price-prediction)
@@ -24,11 +30,3 @@ Must-learn Python libraries:
 - [Matplotlib](https://matplotlib.org/)
 - [Scikit-learn](https://scikit-learn.org/stable/index.html)
 - [Pandas](https://pandas.pydata.org/)
-
-## Future updates
-
-To do:
-- Calculating correlation matrix
-- Metrics for classification
-- More normalization methods
-- More fun models
