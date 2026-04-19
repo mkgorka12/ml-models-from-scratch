@@ -74,10 +74,13 @@ class GeneticAlgorithm:
         ]
 
     def run(
-        self, population_size: int, acceptable_fitness: float
+        self, population_size: int, acceptable_fitness: float, verbose=True
     ) -> tuple[list[Any], list[Any]]:
         genotypes = self.create_population(population_size)
+        if verbose:
+            print(genotypes)
 
+        i = 0
         while True:
             fitnesses = [self.fitness(genotype) for genotype in genotypes]
 
@@ -92,5 +95,12 @@ class GeneticAlgorithm:
             genotypes = self._mutation(genotypes)
 
             genotypes += elites
+
+            if verbose and i % 100 == 0:
+                print('Iteration:', i, 'Best fitness:', fitnesses[0])
+            i += 1
+
+        if verbose:
+            print('Iterations:', i)
 
         return genotypes, compliants
