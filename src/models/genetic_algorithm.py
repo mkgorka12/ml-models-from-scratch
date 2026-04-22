@@ -97,10 +97,10 @@ class GeneticAlgorithm:
             genotypes += elites
 
             if verbose and i % 100 == 0:
-                print('Iteration:', i, 'Best fitness:', fitnesses[0])
+                print("Iteration:", i, "Best fitness:", fitnesses[0])
             i += 1
 
         if verbose:
-            print('Iterations:', i)
+            print("Iterations:", i)
 
         return genotypes, compliants
